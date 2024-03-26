@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 
 @SuppressLint("ComposableNaming")
 @Composable
@@ -26,7 +27,7 @@ fun startScreen(
 
         Button(
             onClick = onNextButtonClicked) {
-            Text(text = "START ORDER")
+            Text(text = stringResource(id = R.string.order))
         }
     }
 }

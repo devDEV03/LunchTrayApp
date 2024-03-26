@@ -1,7 +1,7 @@
 package com.example.lunchtrayapp.data
 
 data class lunchUIstate(
-    val entree : String = " ",
-    val side_dish : String = " ",
-    val accompaniment : String = " ",
+    val entree : Pair<String,Int> = Pair("",0),
+    val side_dish : Pair<String,Int> = Pair("",0),
+    val accompaniment : Pair<String,Int> = Pair("",0),
 )

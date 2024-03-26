@@ -32,4 +32,6 @@
     <string name="Next">NEXT</string>
     <string name="Cancel">CANCEL</string>
     <string name="Submit">SUBMIT</string>
+    <string name="order">START ORDER</string>
+    <string name="price_tag">$ %d</string>
 </resources>
