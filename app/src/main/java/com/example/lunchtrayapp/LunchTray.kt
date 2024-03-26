@@ -45,7 +45,9 @@ fun MainScreen(
             modifier = Modifier.padding(innerPadding)
         ){
             composable(route = Screens.Start.name){
-                
+                startScreen (
+                    onNextButtonClicked = {navCon.navigate(Screens.Entree_Menu.name)}
+                )
             }
             composable(route = Screens.Entree_Menu.name){
 

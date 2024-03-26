@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">LunchTrayApp</string>
+
+    <string name="entree1head">Cauliflower</string>7
+    <string name="entree2head">Three Bean Chili</string>4
+    <string name="entree3head">Mushroom Pasta</string>5.5
+    <string name="entree4head">Spicy Black Bean Skillet</string>5.5
+    <string name="entree1des">Whole Cauliflower,brined,roasted and deep fried</string>
+    <string name="entree2des">Black beans, red beans, kidney beans, slow cooked, topped with onion</string>
+    <string name="entree3des">Penne pasta, mushrooms, basil, with plum tomatoes cooked in garlic and olive oil</string>
+    <string name="entree4des">Seasonal vegetables, black beans, house spice blend,served with avocado and quick pickled onions</string>
+
+    <string name="side1head">Summer Salad</string>2.5
+    <string name="side2head">Butternut Squash Soup</string>3
+    <string name="side3head">Spicy Potatoes</string>2
+    <string name="side4head">Coconut Rice</string>1.5
+    <string name="side1des">Heirloom tomatoes, butter lettuce, peaches, avocado, balsamic dressing</string>
+    <string name="side2des">Roasted butternut squash, roasted peppers,chilli oil</string>
+    <string name="side3des">Marble potatoes, roasted, and fried in house spice blend</string>
+    <string name="side4des">Rice, coconut milk, lime, and sugar</string>
+
+
+    <string name="acc1head">Lunch Roll</string>0.5
+    <string name="acc2head">Mixed Berries</string>1
+    <string name="acc3head">Pickled Veggies</string>0.5
+    <string name="acc1des">Fresh baked roll made in house</string>
+    <string name="acc2des">Strawberries, blueberries, raspberries and huckleberries</string>
+    <string name="acc3des">Pickled cucumber and carrots,made in house</string>
+
+<!--    Button Names-->
+
+    <string name="Next">NEXT</string>
+    <string name="Cancel">CANCEL</string>
+    <string name="Submit">SUBMIT</string>
 </resources>
