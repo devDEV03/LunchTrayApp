@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.lunchtrayapp.data.entreeList
 import com.example.lunchtrayapp.data.lunchUIstate
 
 enum class Screens{
@@ -55,7 +56,7 @@ fun MainScreen(
                     onNextButtonClicked = { navCon.navigate(Screens.Side_Menu.name) },
                     onCancelButtonClicked = { cancelAndReset(navCon,lunchModel) },
                     selectedEntree = { lunchModel.setEntree(it) },
-                    entreeOptions =
+                    entreeOptions = entreeList
                 )
             }
             composable(route = Screens.Side_Menu.name){
