@@ -1,6 +1,8 @@
 package com.example.lunchtrayapp
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,17 +26,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EntreeScreen(
+fun OptionsScreen(
     onNextButtonClicked : () -> Unit,
     onCancelButtonClicked : () -> Unit,
-    selectedEntree : (Triple<Int,Int,Int>) -> Unit,
-    entreeOptions : List<Triple<Int,Int,Int>>
+    selectedOption : (Triple<Int,Int,Int>) -> Unit,
+    itemList : List<Triple<Int,Int,Int>>
 ){
 
     var selectedItem by rememberSaveable {
@@ -43,12 +46,17 @@ fun EntreeScreen(
     Column(
 
     ) {
-        entreeOptions.forEach{
+        itemList.forEach{
             item ->
-            Row {
+            Row(
+                modifier = Modifier.clickable {
+                    selectedItem = item.first
+                    selectedOption(item) }
+                    .fillMaxWidth()
+            ) {
                 RadioButton(
                     selected = item.first == selectedItem,
-                    onClick = {selectedEntree(item)},
+                    onClick = {selectedOption(item)},
                     modifier = Modifier.padding(top = 30.dp)
                 )
                 Column(
@@ -56,7 +64,7 @@ fun EntreeScreen(
                         start = dimensionResource(id = R.dimen.small_dp),
                         bottom = dimensionResource(id = R.dimen.small_dp)
                     ),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                    verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_dp))
 
                 ) {
                     Text(text = stringResource(id = item.first), style = MaterialTheme.typography.titleLarge)
@@ -66,7 +74,7 @@ fun EntreeScreen(
             }
             Divider(thickness = 3.dp)
         }
-        Spacer(modifier = Modifier.height(150.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         Row (
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.Bottom,
@@ -78,6 +86,7 @@ fun EntreeScreen(
                 modifier = Modifier
                     .size(175.dp, 60.dp)
                     .padding(5.dp)
+                    .clip(MaterialTheme.shapes.small)
             ) {
                 Text(text = stringResource(id = R.string.Cancel))
             }
@@ -85,7 +94,8 @@ fun EntreeScreen(
             Button(onClick = { onNextButtonClicked() },
                 modifier = Modifier
                     .size(175.dp, 60.dp)
-                    .padding(5.dp)
+                    .padding(5.dp),
+                enabled = selectedItem != 0
             ) {
                 Text(text = stringResource(id = R.string.Next))
             }

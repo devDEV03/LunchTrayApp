@@ -17,8 +17,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.lunchtrayapp.data.accList
 import com.example.lunchtrayapp.data.entreeList
 import com.example.lunchtrayapp.data.lunchUIstate
+import com.example.lunchtrayapp.data.sideList
 
 enum class Screens{
     Start,
@@ -52,23 +54,36 @@ fun MainScreen(
                 )
             }
             composable(route = Screens.Entree_Menu.name){
-                EntreeScreen(
+                OptionsScreen(
                     onNextButtonClicked = { navCon.navigate(Screens.Side_Menu.name) },
                     onCancelButtonClicked = { cancelAndReset(navCon,lunchModel) },
-                    selectedEntree = { lunchModel.setEntree(it) },
-                    entreeOptions = entreeList
+                    selectedOption = { lunchModel.setEntree(it) },
+                    itemList = entreeList
                 )
             }
             composable(route = Screens.Side_Menu.name){
-
+                OptionsScreen(
+                    onNextButtonClicked = { navCon.navigate(Screens.Accompaniment_Menu.name) },
+                    onCancelButtonClicked = { cancelAndReset(navCon,lunchModel) },
+                    selectedOption = { lunchModel.setSides(it) },
+                    itemList = sideList
+                )
             }
 
             composable(route = Screens.Accompaniment_Menu.name){
-
+                OptionsScreen(
+                    onNextButtonClicked = { navCon.navigate(Screens.Checkout.name) },
+                    onCancelButtonClicked = { cancelAndReset(navCon,lunchModel) },
+                    selectedOption = { lunchModel.setAcc(it) },
+                    itemList = accList
+                )
             }
 
             composable(route = Screens.Checkout.name){
-
+                sumScreen(
+                    onCancelButtonClicked = { cancelAndReset(navCon,lunchModel) },
+                    uiState = uistate
+                )
             }
         }
         

@@ -18,4 +18,19 @@ class LunchViewModel : ViewModel() {
             )
         }
     }
+
+    fun setSides(t1 : Triple<Int,Int,Int>){
+        _uistate.update {
+                currentState -> currentState.copy(
+            side_dish = Pair(t1.first,t1.third)
+        )
+        }
+    }
+    fun setAcc(t1 : Triple<Int,Int,Int>){
+        _uistate.update {
+                currentState -> currentState.copy(
+            accompaniment = Pair(t1.first,t1.third)
+        )
+        }
+    }
 }
