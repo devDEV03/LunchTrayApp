@@ -35,7 +35,7 @@
     <string name="order">START ORDER</string>
     <string name="price_tag">$ %d</string>
     <string name="subtotal">Subtotal : $%d</string>
-    <string name="tax">Total : $%d</string>
-    <string name="Tax">Tax : $%d</string>
+    <string name="total">Total : $%d</string>
+    <string name="tax">Tax : $%d</string>
     <string name="order_summary">Order Summary : </string>
 </resources>
