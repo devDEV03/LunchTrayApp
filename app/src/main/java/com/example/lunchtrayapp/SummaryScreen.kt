@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,7 +25,8 @@ import com.example.lunchtrayapp.data.lunchUIstate
 fun sumScreen(
     onCancelButtonClicked : () -> Unit,
     uiState : lunchUIstate,
-    modifier : Modifier = Modifier
+    modifier : Modifier = Modifier,
+    onSendButtonClicked : (String,String) -> Unit
 ){
         Column(
             verticalArrangement = Arrangement.spacedBy(6.dp),
@@ -77,10 +80,19 @@ fun sumScreen(
                 textAlign = TextAlign.End)
             Text(text = stringResource(id = R.string.total),
                 textAlign = TextAlign.End)
-
+            
+            Row {
+                Button(onClick = { onCancelButtonClicked }) {
+                    Text(text = stringResource(id = R.string.Cancel))
+                }
+                OutlinedButton(onClick = {onSendButtonClicked("Dev","Singhal") /*TODO*/ }) {
+                    Text(text = "Share")
+                }
+            }
 
         }
     }
+
 
 @Composable
 fun itemSummary(

@@ -1,12 +1,19 @@
 package com.example.lunchtrayapp
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -16,7 +23,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.lunchtrayapp.data.accList
 import com.example.lunchtrayapp.data.entreeList
 import com.example.lunchtrayapp.data.lunchUIstate
@@ -37,8 +47,19 @@ fun MainScreen(
     lunchModel : LunchViewModel = viewModel()
 )
 {
+    val backStackEntry by navCon.currentBackStackEntryAsState()
+    val currentScreen = Screens.valueOf(
+        backStackEntry?.destination?.route?:Screens.Start.name
+    )
     Scaffold(
-        topBar = { CenterAlignedTopAppBar(title = { /*TODO*/ }) }
+        topBar = {
+            TopAppBar(
+                currentScreen = currentScreen,
+                canNavigateBack = navCon.previousBackStackEntry != null,
+                navigateUp = { navCon.navigateUp() },
+                modifier = Modifier
+            )
+        }
     ) {
         innerPadding ->
 
@@ -80,9 +101,14 @@ fun MainScreen(
             }
 
             composable(route = Screens.Checkout.name){
+                val context = LocalContext.current
                 sumScreen(
                     onCancelButtonClicked = { cancelAndReset(navCon,lunchModel) },
-                    uiState = uistate
+                    uiState = uistate,
+                    onSendButtonClicked = {
+                        summary : String,order : String ->
+                        shareOrder(context,summary,order)
+                    }
                 )
             }
         }
@@ -100,3 +126,44 @@ private fun cancelAndReset(
     navCon.popBackStack(Screens.Start.name,false)
 
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar(
+    currentScreen : Screens,
+    canNavigateBack : Boolean,
+    navigateUp : () -> Unit = {},
+    modifier : Modifier
+){
+    CenterAlignedTopAppBar(title = {
+        Text(text = currentScreen.name)
+    },
+        navigationIcon = {
+            if(canNavigateBack){
+                IconButton(onClick = {navigateUp}) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                }
+            }
+        }
+    )
+}
+
+private fun shareOrder(
+    context: Context,
+    summary : String,
+    order : String
+){
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_SUBJECT, order)
+        putExtra(Intent.EXTRA_TEXT, summary)
+    }
+    context.startActivity(
+        Intent.createChooser(
+            intent,
+            context.getString(R.string.tax)
+        )
+    )
+
+}
+
