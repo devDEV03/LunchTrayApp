@@ -2,29 +2,40 @@ package com.example.lunchtrayapp
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.lunchtrayapp.data.accList
@@ -59,6 +70,9 @@ fun MainScreen(
                 navigateUp = { navCon.navigateUp() },
                 modifier = Modifier
             )
+        },
+        bottomBar = {
+            bottomBar()
         }
     ) {
         innerPadding ->
@@ -146,6 +160,38 @@ fun TopAppBar(
             }
         }
     )
+}
+
+@Composable
+fun bottomBar(
+){
+    NavigationBar(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row (
+            modifier  = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Absolute.SpaceBetween,
+            verticalAlignment = Alignment.Bottom
+        ){
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.Menu, contentDescription = null)
+            }
+
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+            }
+
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.KeyboardArrowUp, contentDescription = null)
+            }
+
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.AccountBox, contentDescription = null)
+            }
+
+        }
+
+    }
 }
 
 private fun shareOrder(
