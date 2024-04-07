@@ -33,4 +33,19 @@ class LunchViewModel : ViewModel() {
         )
         }
     }
+
+    fun calculateBill(){
+        val subtotal1 = _uistate.value.entree.second + _uistate.value.side_dish.second + _uistate.value.accompaniment.second
+        val tax1 = (_uistate.value.entree.second + _uistate.value.side_dish.second + _uistate.value.accompaniment.second)*0.05
+        val total1 =  subtotal1 + tax1
+
+        _uistate.update {
+            currentState -> currentState.copy(
+                subtotal = subtotal1,
+                tax = tax1,
+                total_bill = total1
+            )
+        }
+    }
+
 }
